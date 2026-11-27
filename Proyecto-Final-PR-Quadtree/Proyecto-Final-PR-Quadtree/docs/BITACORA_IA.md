@@ -19,7 +19,9 @@
 - Cómo lo comprobamos: corrimos `mvn test` (21 pruebas pasan) y la demostración por consola. Revisamos que la salida cumpla nuestras reglas: el punto 512 va a la mitad derecha o inferior, x = 1024 se rechaza y una zona fuera del plano devuelve una lista vacía.
 - Pendiente: cada uno revisa su parte y anotamos aquí lo que cambiemos.
 
-- Integrante: Brayan Vásquez
+  
+
+- Integrante: Brayan José Vásquez Duron
 - Fecha: 26/11/26
 - Herramienta: Gemini
 - Propósito: solicitud de apoyo para la representación de las regiones que ayudara a la implementación de las regiones y entradas espaciales para el programa.
