@@ -19,6 +19,22 @@
 - Cómo lo comprobamos: corrimos `mvn test` (21 pruebas pasan) y la demostración por consola. Revisamos que la salida cumpla nuestras reglas: el punto 512 va a la mitad derecha o inferior, x = 1024 se rechaza y una zona fuera del plano devuelve una lista vacía.
 - Pendiente: cada uno revisa su parte y anotamos aquí lo que cambiemos.
 
+- Integrante: Brayan Vásquez
+- Fecha: 26/11/26
+- Herramienta: Gemini
+- Propósito: solicitud de apoyo para la representación de las regiones que ayudara a la implementación de las regiones y entradas espaciales para el programa.
+- Aviso principal: Implementar el nodo (QuadNode<T>) y la clase principal (PRQuadtree<T>) en Java apoyándose en Region y SpatialEntry<T>, cubriendo inserción, búsqueda por área (queryRange) y búsqueda por radio (queryRadius) para un localizador de servicios.
+- Desiciones aceptadas: 
+- La representación de las regiones en un plano X y Y, y la representación del nodo, motivo: simplifica la estructura y evita duplicar clases de nodos hoja e internos manteniendo la semántica de un PR Quadtree.
+- limite de subdivisión: subdividir al superar maxCapacity, pero detener la subdivisión al alcanzar maxDepth. Motivo: evita stackOverflowError o recursión infinita si varios servicios comparten exactamente las mismas coordenadas (X, Y).
+- Busqueda por Area:  verificar boundary.intersects(range) antes de recorrer un nodo y comprobar rango.contains(…) en las hojas. Motivo: permite podar cuadrantes completos que no se superponen con el área consultada, reduciendo el recorrido del árbol.
+- Correcciones o descartes: 
+- Descartes de subdivisión sin tope de profundidad: se descarto subdividir indefinidamente solo por maxCapacity porque puntos coincidentes o muy cercanos pueden agotar la pila de llamadas.
+- Se descarto evaluar la distancia circular en cada nodo interno sin filtro de caja: se prefirió primero podar con Region.intersects(boundingBox) y evaluar isWithhinRadius en las entradas hoja para mantener coherencia con las operaciones de Region y SpacialEntry.
+- Ajuste en caso de borde de radio cero: Se contemplo que podía ocurrir el caso de la existencia de un radio 0, para que no produzca error por un radio que no sea positivo ni devolver puntos fuera de la coordenada exacta.
+
+
+
 ## Cómo registraremos los siguientes usos
 
 Anotaremos integrante, fecha, herramienta, propósito, prompt principal, decisiones aceptadas, correcciones o descartes y el motivo de cada decisión. Añadiremos la forma en que verificamos el resultado.
