@@ -11,7 +11,9 @@ Desarrollaremos en Java un PR Quadtree propio para localizar servicios dentro de
 - Miguel Angel Chinchilla Coello: desarrollaré pruebas JUnit 5, verificaré resultados y prepararé experimentos.
 
 ## Nuestro estado actual
-Contamos con una base Maven, un punto de entrada y una prueba de configuración. Todavía no hemos incorporado la implementación del quadtree, pruebas espaciales, interfaz ni mediciones. No consideramos la prueba inicial como evidencia de corrección de la estructura.
+Contamos con `Region`, `EntradaEspacial`, `NodoQuadtree` y `PRQuadtree` con inserción, subdivisión, redistribución, consulta rectangular y recorrido. La aplicación (`LocalizadorServicios` y `Aplicacion`) registra servicios con identificador único y muestra consultas por consola, incluidas zonas sobre los límites y fuera del plano. Hay 21 pruebas JUnit 5 pasando, entre ellas una comparación con búsqueda lineal sobre 2000 puntos aleatorios.
+
+Pendiente: búsqueda y eliminación, visualización en Swing, experimentos de rendimiento con `System.nanoTime()` y ampliación de las pruebas de `Region` y `EntradaEspacial`.
 
 ## Nuestro entorno
 Trabajaremos con JDK 17 y Maven 3.9.x instalado en PATH. Necesitaremos internet en la primera descarga de dependencias. Comprobaremos las versiones con `java -version` y `mvn -version`. No incluimos Maven Wrapper.
@@ -44,7 +46,7 @@ Si ya estamos en la carpeta que contiene `pom.xml`, ejecutaremos directamente lo
 12. Dejaremos eliminación y Swing para después del avance. No implementaremos compactación inicialmente.
 
 ## Nuestro contrato de trabajo
-Implementaremos estas firmas de forma compartida; todavía no están presentes en el código:
+Implementamos estas firmas de forma compartida; ya están presentes en el código:
 - `Region(double minX, double minY, double maxX, double maxY)`.
 - `Region.contiene(double x, double y)` → boolean.
 - `Region.intersecta(Region otra)` → boolean; rechazaremos null.
@@ -66,12 +68,12 @@ Definiremos búsqueda y eliminación posteriormente sin romper estas operaciones
 Trabajaremos en ramas `feature/modelos`, `feature/quadtree`, `test/pruebas` y `docs/informe`. Haremos cambios pequeños, actualizaremos las ramas desde main y revisaremos cada integración con otro integrante. Ejecutaremos `mvn test` antes de integrar. No subiremos target, credenciales ni archivos personales del IDE.
 
 ## Cómo comprobaremos el avance
-- [ ] Implementaremos y probaremos regiones y entradas.
-- [ ] Integraremos inserción, subdivisión, redistribución y consulta.
-- [ ] Pasaremos pruebas espaciales, además de la inicial.
+- [x] Implementaremos regiones y entradas (pruebas propias pendientes).
+- [x] Integraremos inserción, subdivisión, redistribución y consulta.
+- [x] Pasaremos pruebas espaciales, además de la inicial.
 - [ ] Contrastaremos consultas con búsqueda lineal, comparando identificadores sin depender del orden.
-- [ ] Mostraremos por consola más de cuatro puntos y consultas sobre límites.
+- [x] Mostraremos por consola más de cuatro puntos y consultas sobre límites.
 - [ ] Presentaremos investigación, informe parcial y bitácora actualizada.
 - [ ] Ejecutaremos desde una descarga limpia en otro equipo.
 
-Mantendremos los detalles en docs/PLAN_48_HORAS.md, docs/FUENTES.md y docs/BITACORA_IA.md.
+Mantendremos los detalles en docs/TDA.md, docs/PLAN_48_HORAS.md, docs/FUENTES.md y docs/BITACORA_IA.md.
